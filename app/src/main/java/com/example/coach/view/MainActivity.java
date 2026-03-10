@@ -1,11 +1,13 @@
 package com.example.coach.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements ICalculView {
     private void init(){
         chargeObjetGraphiques();
         presenter = new CalculPresenter(this);
+        btnCalc.setOnClickListener(v -> btnCalc_clic());
     }
     private void chargeObjetGraphiques(){
         txtPoids = (EditText) findViewById(R.id.txtPoids);
@@ -59,13 +62,31 @@ public class MainActivity extends AppCompatActivity implements ICalculView {
 
     @Override
     public void afficherResultat(String image, double img, String message, boolean normal) {
-
+        int imageId = getResources().getIdentifier(image, "drawable", getPackageName());
+        if(imageId==0){
+            imgSmiley.setImageResource(R.drawable.normal);
+        }else{
+            imgSmiley.setImageResource(imageId);
+        }
+        String texte = String.format("%.01f", img)+" : IMG "+message;
+        lblImg.setText(texte);
+        lblImg.setTextColor(normal ? Color.GREEN : Color.RED);
     }
 
     private void btnCalc_clic(){
         Integer poids = 0, taille = 0, age = 0, sexe = 0;
-        poids = Integer.parseInt(txtPoids.getText().toString());
-        taille = Integer.parseInt(txtTaille.getText().toString());
-        age = Integer.parseInt(txtAge.getText().toString());
+        try {
+            poids = Integer.parseInt(txtPoids.getText().toString());
+            taille = Integer.parseInt(txtTaille.getText().toString());
+            age = Integer.parseInt(txtAge.getText().toString());
+        }catch(Exception ignored){}
+        if(rdHomme.isChecked()){
+            sexe = 1;
+        }
+        if(poids == 0 || taille==0||age==0){
+            Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
+        }else{
+            presenter.creerProfil(poids, taille, age, sexe);
+        }
     }
 }
