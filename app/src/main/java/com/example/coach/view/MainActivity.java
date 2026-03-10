@@ -30,12 +30,18 @@ public class MainActivity extends AppCompatActivity implements ICalculView {
     private Button btnCalc;
     private CalculPresenter presenter;
 
-
+    /**
+     *
+     */
     private void init(){
         chargeObjetGraphiques();
         presenter = new CalculPresenter(this);
         btnCalc.setOnClickListener(v -> btnCalc_clic());
     }
+
+    /**
+     *
+     */
     private void chargeObjetGraphiques(){
         txtPoids = (EditText) findViewById(R.id.txtPoids);
         txtTaille = (EditText) findViewById(R.id.txtTaille);
@@ -47,6 +53,13 @@ public class MainActivity extends AppCompatActivity implements ICalculView {
         btnCalc = (Button) findViewById(R.id.btnCalc);
     }
 
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,19 +73,29 @@ public class MainActivity extends AppCompatActivity implements ICalculView {
         init();
     }
 
+    /**
+     *
+     * @param image
+     * @param img
+     * @param message
+     * @param normal
+     */
     @Override
     public void afficherResultat(String image, double img, String message, boolean normal) {
         int imageId = getResources().getIdentifier(image, "drawable", getPackageName());
-        if(imageId==0){
+        if(imageId!=0){
             imgSmiley.setImageResource(R.drawable.normal);
         }else{
             imgSmiley.setImageResource(imageId);
         }
-        String texte = String.format("%.01f", img)+" : IMG "+message;
+        String texte = String.format("%.01f", img) + " : IMG " + message;
         lblImg.setText(texte);
         lblImg.setTextColor(normal ? Color.GREEN : Color.RED);
     }
 
+    /**
+     *
+     */
     private void btnCalc_clic(){
         Integer poids = 0, taille = 0, age = 0, sexe = 0;
         try {

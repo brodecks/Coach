@@ -17,6 +17,13 @@ public class Profil {
     private double img;
     private int indice;
 
+    /**
+     *
+     * @param poids
+     * @param taille
+     * @param age
+     * @param sexe
+     */
     public Profil(Integer poids, Integer taille, Integer age, Integer sexe) {
         this.poids = poids;
         this.taille = taille;
@@ -25,23 +32,53 @@ public class Profil {
         this.img = calculImg();
         this.indice = calculIndice();
     }
+
+    /**
+     *
+     * @return
+     */
     public double getImg(){
         return img;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getMessage(){
         return MESSAGE[indice];
     }
+
+    /**
+     *
+     * @return
+     */
     public String getImage(){
         return IMAGE[indice];
     }
+
+    /**
+     *
+     * @return
+     */
     public boolean normal(){
         return indice==1;
     }
+
+    /**
+     *
+     * @return
+     */
     private double calculImg(){
         double tailleMetres = this.taille/100.0;
 
         return (1.2*poids/(tailleMetres*tailleMetres))+(0.23*age)-(10.83*sexe)-5.4;
     }
+
+    /**
+     *
+     * @return
+     */
     private int calculIndice(){
         int min = (sexe==0) ? MIN_FEMME : MIN_HOMME;
         int max = (sexe==0) ? MAX_FEMME : MAX_HOMME;

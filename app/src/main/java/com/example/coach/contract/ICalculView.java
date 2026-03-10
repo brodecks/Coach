@@ -1,5 +1,12 @@
 package com.example.coach.contract;
 
 public interface ICalculView {
+    /**
+     *
+     * @param image
+     * @param img
+     * @param message
+     * @param normal
+     */
     void afficherResultat(String image, double img, String message, boolean normal);
 }
