@@ -16,8 +16,9 @@ public class Profil {
     private Integer age;
     private Integer sexe;
 
-    private double img;
-    private int indice;
+    //proprietes ignores par gson grace au mot cle transient
+    private transient double img;
+    private transient int indice;
     private Date dateMesure;
 
     /**
