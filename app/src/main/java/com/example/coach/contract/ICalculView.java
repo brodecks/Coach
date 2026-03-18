@@ -1,6 +1,6 @@
 package com.example.coach.contract;
 
-public interface ICalculView {
+public interface ICalculView extends IAllView{
     /**
      *
      * @param image
