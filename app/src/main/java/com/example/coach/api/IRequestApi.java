@@ -20,4 +20,6 @@ public interface IRequestApi {
     Call<ResponseApi<Integer>> creerProfil(@Field("champs") String profilJson);
     @DELETE("profil/{champs}")
     Call<ResponseApi<Integer>> supprProfil(@Path(value = "champs", encoded = true) String profilJson);
+    @DELETE("profil")
+    Call<ResponseApi<Integer>> purgerProfils();
 }

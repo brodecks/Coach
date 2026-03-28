@@ -2,6 +2,7 @@ package com.example.coach.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,8 +24,11 @@ public class HistoActivity extends AppCompatActivity implements IHistoView {
 
 
     private HistoPresenter presenter;
+    private Button btnPurger;
     private void init(){
         presenter = new HistoPresenter(this);
+        btnPurger = findViewById(R.id.btnPurger);
+        btnPurger.setOnClickListener(v -> btnPurger_clic());
         presenter.chargerProfils();
     }
     @Override
@@ -60,5 +64,8 @@ public class HistoActivity extends AppCompatActivity implements IHistoView {
     @Override
     public void afficherMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+    private void btnPurger_clic(){
+        presenter.purgerProfils();
     }
 }

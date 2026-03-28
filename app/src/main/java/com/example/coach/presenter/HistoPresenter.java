@@ -61,4 +61,17 @@ public class HistoPresenter {
     public void transfertProfil(Profil profil){
         vue.transfertProfil(profil);
     }
+    public void purgerProfils(){
+        HelperApi.call(HelperApi.getApi().purgerProfils(), new ICallbackApi<Integer>() {
+            @Override
+            public void onSuccess(Integer result) {
+                vue.afficherMessage(result + " enregistrements supprimés");
+                chargerProfils();
+            }
+            @Override
+            public void onError() {
+                vue.afficherMessage("Échec de la purge");
+            }
+        });
+    }
 }
